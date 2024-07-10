@@ -70,6 +70,7 @@ class _EmpShowNewGirlsState extends State<EmpShowNewGirls> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+
                               TextButton(onPressed: (){
                                 Navigator.of(context).pop();
                               },

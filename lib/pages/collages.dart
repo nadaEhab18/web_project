@@ -58,7 +58,7 @@ class _CollagesState extends State<Collages> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                          const     Text(
-                                "بيانات الطلاب الجدد",
+                                "بيانات الكليات",
                                 style: TextStyle(
                                   color: Color(0xff003c60),
                                   fontSize: 30,
@@ -325,7 +325,9 @@ class _CollagesState extends State<Collages> {
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم إضافة الكلية بنجاح'),
+            content: Text('تم إضافة الكلية بنجاح',style: TextStyle(
+              fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+            ),),
             backgroundColor: Colors.green,
           ),
         );
@@ -335,7 +337,9 @@ class _CollagesState extends State<Collages> {
         // Show failure message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('فشل في إضافة الكلية'),
+            content: Text('فشل في إضافة الكلية',style: TextStyle(
+              fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+            ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -344,7 +348,9 @@ class _CollagesState extends State<Collages> {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('حدث خطأ أثناء إضافة الكلية'),
+          content: Text('حدث خطأ أثناء إضافة الكلية',style: TextStyle(
+            fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+          ),),
           backgroundColor: Colors.red,
         ),
       );
@@ -362,7 +368,10 @@ class _CollagesState extends State<Collages> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم تحديث الكلية بنجاح'),
+            content: Text('تم تحديث الكلية بنجاح',style: TextStyle(
+              fontSize: 22,fontWeight: FontWeight.bold,
+              color: Colors.white
+            ),),
             backgroundColor: Colors.green,
           ),
         );
@@ -371,7 +380,9 @@ class _CollagesState extends State<Collages> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('فشل في تحديث الكلية'),
+            content: Text('فشل في تحديث الكلية',style: TextStyle(
+              fontSize: 25,fontWeight: FontWeight.bold,
+            ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -381,7 +392,10 @@ class _CollagesState extends State<Collages> {
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('حدث خطأ أثناء تحديث الكلية'),
+          content: Text('حدث خطأ أثناء تحديث الكلية',style: TextStyle(
+            fontSize: 22,fontWeight: FontWeight.bold,
+            color: Colors.white
+          ),),
           backgroundColor: Colors.red,
         ),
       );
@@ -397,7 +411,9 @@ class _CollagesState extends State<Collages> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم حذف الكلية بنجاح'),
+            content: Text('تم حذف الكلية بنجاح',style: TextStyle(
+              fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+            ),),
             backgroundColor: Colors.green,
           ),
         );
@@ -406,7 +422,9 @@ class _CollagesState extends State<Collages> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('فشل في حذف الكلية'),
+            content: Text('فشل في حذف الكلية',style: TextStyle(
+              fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+            ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -416,7 +434,9 @@ class _CollagesState extends State<Collages> {
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('حدث خطأ أثناء حذف الكلية'),
+          content: Text('حدث خطأ أثناء حذف الكلية',style: TextStyle(
+            fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+          ),),
           backgroundColor: Colors.red,
         ),
       );

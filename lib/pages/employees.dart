@@ -80,220 +80,219 @@ class _EmployeesState extends State<Employees> {
                         bottomRight: Radius.circular(30),
                       ),
                     ),
-                    child: Column(
-                      children: [
-                        HeadBar(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "بيانات العاملين بالنظام",
-                              style: TextStyle(
-                                color: Color(0xff003c60),
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Divider(
-                          color: AppColors.mainColor,
-                          thickness: 0.5,
-                        ),
-                        SizedBox(height: 15,),
-                        Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          child: DataTable(
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            dataRowColor: MaterialStateProperty.all(
-                                Colors.white),
-                            columns: const [
-                              const DataColumn(
-                                label: Text(
-                                  'الاسم', // id
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xffac8600),
-                                    fontSize: 23,
-                                  ),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          HeadBar(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "بيانات العاملين بالنظام",
+                                style: TextStyle(
+                                  color: Color(0xff003c60),
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const DataColumn(
-                                label: Text(
-                                  'الرقم القومى',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xffac8600),
-                                    fontSize: 23,
-                                  ),
-                                ),
-                              ),
-                              const DataColumn(
-                                label: Text(
-                                  ' ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xffac8600),
-                                  ),
-                                ),
-                              ), // CRUD operations
                             ],
-                            rows: employeesData.map((employee) =>
-                                DataRow(
-                                  cells: [
-                                    DataCell(Text('${employee.name}',
-                                      style: TextStyle(fontSize: 22),)),
-                                    DataCell(Text('${employee.nationalId}',
-                                        style: TextStyle(fontSize: 22))),
-                                    DataCell(
-                                      Row(
-                                        children: [
-                                          IconButton(
-                                          onPressed: () {
-                                   //  showDialog(
-                                   //  context: context,
-                                   //  builder: (BuildContext context) {
-                                   //  String newName = employee.name; // Initialize with current name
-                                   // // String newPassword = ""; // Initialize with current password or provide an input field for the user to enter a new password
-                                   //  String newNationalId = employee.nationalId; // Initialize with current admin ID or provide an input field for the user to select a new admin ID
-                                   //  return Directionality(
-                                   //  textDirection: TextDirection.rtl,
-                                   //  child: AlertDialog(
-                                   //  backgroundColor: Colors.grey.shade50,
-                                   //  title: Text(
-                                   //  "تحديث الموظف",
-                                   //  textDirection: TextDirection.rtl,
-                                   //  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                                   //  ),
-                                   //  content: Column(
-                                   //  mainAxisSize: MainAxisSize.min,
-                                   //  children: [
-                                   //  TextFormField(
-                                   //  decoration: InputDecoration(
-                                   //  border: OutlineInputBorder(),
-                                   //  prefixIcon: const Icon(
-                                   //  Icons.person,
-                                   //  color: Colors.black,
-                                   //  ),
-                                   //  enabledBorder: OutlineInputBorder(
-                                   //  borderRadius: BorderRadius.circular(10),
-                                   //  borderSide: BorderSide(
-                                   //  color: Colors.grey[500]!,
-                                   //  ),
-                                   //  ),
-                                   //  contentPadding: const EdgeInsets.all(16),
-                                   //  ),
-                                   //  initialValue: newName,
-                                   //  onChanged: (value) {
-                                   //  newName = value; // Update newName as the user types
-                                   //  },
-                                   //  ),
-                                   //  SizedBox(height: 10),
-                                   //  TextFormField(
-                                   //  obscureText: true, // for password
-                                   //  decoration: InputDecoration(
-                                   //  border: OutlineInputBorder(),
-                                   //  prefixIcon: const Icon(
-                                   //  Icons.lock,
-                                   //  color: Colors.black,
-                                   //  ),
-                                   //  enabledBorder: OutlineInputBorder(
-                                   //  borderRadius: BorderRadius.circular(10),
-                                   //  borderSide: BorderSide(
-                                   //  color: Colors.grey[500]!,
-                                   //  ),
-                                   //  ),
-                                   //  contentPadding: const EdgeInsets.all(16),
-                                   //  ),
-                                   //  onChanged: (value) {
-                                   //  newPassword = value; // Update newPassword as the user types
-                                   //  },
-                                   //  ),
-                                   //  SizedBox(height: 10),
-                                   //  // You may need to provide a dropdown or input field for selecting the new admin ID
-                                   //  ],
-                                   //  ),
-                                   //  actions: [
-                                   //  TextButton(
-                                   //  onPressed: () {
-                                   //  Navigator.of(context).pop(); // Close the dialog
-                                   //  },
-                                   //  child: Text(
-                                   //  "إلغاء",
-                                   //  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                                   //  ),
-                                   //  ),
-                                   //  TextButton(
-                                   //  onPressed: () {
-                                   //  updateEmployee(employee.id, newName, newPassword, newNationalId, context); // Call updateEmployee function with the new information
-                                   //  Navigator.of(context).pop(); // Close the dialog
-                                   //  },
-                                   //  child: Text(
-                                   //  "تحديث",
-                                   //  style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
-                                   //  ),
-                                   //  ),
-                                   //  ],
-                                   //  ),
-                                   //  );
-                                   //  },
-                                   //  );
-                                    },
-                                      icon: Icon(Icons.edit_note_rounded, color: Colors.green, size: 30),
-                                    ),
-
-                                          IconButton(
-                                            onPressed: () {
-                                              showDialog(
-                                                context: context,
-                                                builder: (BuildContext context) {
-                                                  return Directionality(
-                                                    textDirection: TextDirection.rtl,
-                                                    child: AlertDialog(
-                                                      backgroundColor: Colors.grey.shade50,
-                                                      title: Text("تأكيد الحذف",style: TextStyle(color: Colors.red),),
-                                                      content: Text("هل أنت متأكد من رغبتك في حذف الكلية؟"),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(context).pop(); // Close the dialog
-                                                          },
-                                                          child: Text("إلغاء",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            deleteEmployee(employee.id,context);
-                                                            Navigator.of(context).pop(); // Close the dialog
-                                                          },
-                                                          child: Text("حذف",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              );
-
-
-
-                                            },
-                                            icon: const Icon(Icons.delete,
-                                                color: Colors.red),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )).toList(),
                           ),
-                        ),
-                      ],
+                          Divider(
+                            color: AppColors.mainColor,
+                            thickness: 0.5,
+                          ),
+                          SizedBox(height: 15,),
+                          Container(
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
+                            child: DataTable(
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade100,
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              dataRowColor: MaterialStateProperty.all(
+                                  Colors.white),
+                              columns: const [
+                                const DataColumn(
+                                  label: Text(
+                                    'الاسم', // id
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xffac8600),
+                                      fontSize: 23,
+                                    ),
+                                  ),
+                                ),
+                                const DataColumn(
+                                  label: Text(
+                                    'الرقم القومى',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xffac8600),
+                                      fontSize: 23,
+                                    ),
+                                  ),
+                                ),
+                                const DataColumn(
+                                  label: Text(
+                                    ' ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xffac8600),
+                                    ),
+                                  ),
+                                ), // CRUD operations
+                              ],
+                              rows: employeesData.map((employee) =>
+                                  DataRow(
+                                    cells: [
+                                      DataCell(Text('${employee.name}',
+                                        style: TextStyle(fontSize: 22),)),
+                                      DataCell(Text('${employee.nationalId}',
+                                          style: TextStyle(fontSize: 22))),
+                                      DataCell(
+                                        Row(
+                                          children: [
+                                            IconButton(
+                                            onPressed: () {
+                                      showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                      String newName = employee.name; // Initialize with current name
+                                      String newNationalId = employee.nationalId; // Initialize with current admin ID or provide an input field for the user to select a new admin ID
+                                      return Directionality(
+                                      textDirection: TextDirection.rtl,
+                                      child: AlertDialog(
+                                      backgroundColor: Colors.grey.shade50,
+                                      title: Text(
+                                      "تحديث الموظف",
+                                      textDirection: TextDirection.rtl,
+                                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                                      ),
+                                      content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                      TextFormField(
+                                      decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      prefixIcon: const Icon(
+                                      Icons.person,
+                                      color: Colors.black,
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                      color: Colors.grey[500]!,
+                                      ),
+                                      ),
+                                      contentPadding: const EdgeInsets.all(16),
+                                      ),
+                                      initialValue: newName,
+                                      onChanged: (value) {
+                                        newName = value; // Update newName as the user types
+                                      },
+                                      ),
+                                      SizedBox(height: 10),
+                                        TextFormField(
+                                          decoration: InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            prefixIcon: const Icon(
+                                              Icons.quick_contacts_mail,
+                                              color: Colors.black,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                              borderSide: BorderSide(
+                                                color: Colors.grey[500]!,
+                                              ),
+                                            ),
+                                            contentPadding: const EdgeInsets.all(16),
+                                          ),
+                                          initialValue: newNationalId,
+                                          onChanged: (value) {
+                                            newNationalId = value; // Update newName as the user types
+                                          },
+                                        ),
+                                      ],
+                                      ),
+                                      actions: [
+                                      TextButton(
+                                      onPressed: () {
+                                      Navigator.of(context).pop(); // Close the dialog
+                                      },
+                                      child: Text(
+                                      "إلغاء",
+                                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                                      ),
+                                      ),
+                                      TextButton(
+                                      onPressed: () {
+                                      updateEmployee(employee.id, newName, newNationalId, context); // Call updateEmployee function with the new information
+                                      Navigator.of(context).pop(); // Close the dialog
+                                      },
+                                      child: Text(
+                                      "تحديث",
+                                      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                                      ),
+                                      ),
+                                      ],
+                                      ),
+                                      );
+                                      },
+                                      );
+                                      },
+                                        icon: Icon(Icons.edit_note_rounded, color: Colors.green, size: 30),
+                                      ),
+
+                                            IconButton(
+                                              onPressed: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (BuildContext context) {
+                                                    return Directionality(
+                                                      textDirection: TextDirection.rtl,
+                                                      child: AlertDialog(
+                                                        backgroundColor: Colors.grey.shade50,
+                                                        title: Text("تأكيد الحذف",style: TextStyle(color: Colors.red),),
+                                                        content: Text("هل أنت متأكد من رغبتك في الحذف ؟"),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(context).pop(); // Close the dialog
+                                                            },
+                                                            child: Text("إلغاء",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              deleteEmployee(employee.id,context);
+                                                              Navigator.of(context).pop(); // Close the dialog
+                                                            },
+                                                            child: Text("حذف",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+
+
+
+                                              },
+                                              icon: const Icon(Icons.delete,
+                                                  color: Colors.red),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -485,7 +484,8 @@ class _EmployeesState extends State<Employees> {
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم إضافة الموظف بنجاح'),
+            content: Text('تم إضافة الموظف بنجاح',
+            style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),),
             backgroundColor: Colors.green,
           ),
         );
@@ -503,7 +503,9 @@ class _EmployeesState extends State<Employees> {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('حدث خطأ أثناء إضافة الموظف'),
+          content: Text('حدث خطأ أثناء إضافة الموظف , الموظف موجود بالفعل',style: TextStyle(
+            fontSize: 25,fontWeight: FontWeight.bold,
+          ),),
           backgroundColor: Colors.red,
         ),
       );
@@ -512,20 +514,21 @@ class _EmployeesState extends State<Employees> {
   }
 
 
-  void updateEmployee(int employeeId, String newName, String newPassword, String newNationalId, BuildContext context) async {
+  void updateEmployee(int employeeId, String newName, String newNationalId, BuildContext context) async {
     try {
       Response response = await Dio().put(
         'http://localhost:4000/admin/updateemployee/$employeeId',
         data: {
           "name": newName,
-          "password": newPassword,
-          "admin_id": newNationalId,
+          "national_ID":newNationalId
         },
       );
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم تحديث الموظف بنجاح'),
+            content: Text('تم تحديث الموظف بنجاح',style: TextStyle(
+              fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+            ),),
             backgroundColor: Colors.green,
           ),
         );
@@ -534,7 +537,9 @@ class _EmployeesState extends State<Employees> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('فشل في تحديث الموظف'),
+            content: Text('فشل في تحديث الموظف',style: TextStyle(
+              fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+            ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -544,7 +549,9 @@ class _EmployeesState extends State<Employees> {
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('حدث خطأ أثناء تحديث الموظف'),
+          content: Text('حدث خطأ أثناء تحديث الموظف',style: TextStyle(
+            fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+          ),),
           backgroundColor: Colors.red,
         ),
       );
@@ -560,7 +567,9 @@ class _EmployeesState extends State<Employees> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم حذف الموظف بنجاح'),
+            content: Text('تم حذف الموظف بنجاح',style: TextStyle(
+              fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+            ),),
             backgroundColor: Colors.green,
           ),
         );
@@ -569,7 +578,9 @@ class _EmployeesState extends State<Employees> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('فشل في حذف الموظف'),
+            content: Text('فشل في حذف الموظف',style: TextStyle(
+              fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+            ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -579,7 +590,9 @@ class _EmployeesState extends State<Employees> {
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('حدث خطأ أثناء حذف الموظف'),
+          content: Text('حدث خطأ أثناء حذف الموظف',style: TextStyle(
+            fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white,
+          ),),
           backgroundColor: Colors.red,
         ),
       );
@@ -589,65 +602,6 @@ class _EmployeesState extends State<Employees> {
   }
 
 
-// void deleteEmployeeMethod(int idEmployee) async{
-//   try {
-//     final respone = await Dio().delete('http://localhost:4000/admin/deleteemployee/$idEmployee');
-//
-//
-//     // Debugging: Print response data
-//     print('Response: $respone');
-//
-//     setState(() => isLoading = false);
-//     ScaffoldMessenger.of(context).showSnackBar(
-//       SnackBar(
-//         content: Text('تم الحذف بنجاح'),
-//         backgroundColor: isLoading == false ? Colors.green : Colors.red,
-//       ),
-//     );
-//   } catch (e) {
-//     // Error handling: Print and show error message
-//     print('Error adding employee: $e');
-//     setState(() => isLoading = false);
-//     ScaffoldMessenger.of(context).showSnackBar(
-//       SnackBar(
-//         content: Text('حدث خطأ أثناء حذف الموظف'),
-//         backgroundColor: Colors.red,
-//       ),
-//     );
-//   }
-// }
-
-
-// void _addEmployeeMethod() async {
-//   bool isFormValid = formKey.currentState!.validate();
-//   if (isFormValid) {
-//     setState(() => isLoading = true);
-//     final Response response = await Dio().post(
-//         'http://localhost:4000/admin/addemployee',
-//         data: {
-//           "name":userNameController.text,
-//           "password":passwordController.text,
-//           "admin_id":adminIDController.text,
-//         }
-//     );
-//
-//     // debugging
-//     print('this is a response : $response');
-//
-//     setState(() => isLoading = false);
-//     ScaffoldMessenger.of(context).showSnackBar(
-//       SnackBar(
-//         content: Text('تم الاضافة بنجاح'),
-//         backgroundColor: isLoading == false ? Colors.green : Colors.red,
-//       ),
-//     );
-//    // Navigator.of(context).pop();
-//
-//       // (route) => false,
-//
-//     //}
-//   }
-// }
 
 
 }

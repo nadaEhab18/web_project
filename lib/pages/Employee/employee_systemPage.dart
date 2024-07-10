@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:web_project/pages/Employee/acceptedRequest.dart';
 import 'package:web_project/pages/Employee/employee_sideBar_menu.dart';
+import 'package:web_project/pages/Employee/newStudents_filter.dart';
+import 'package:web_project/pages/Employee/oldStudents_flitter.dart';
+import 'package:web_project/pages/Employee/rejectedRequest.dart';
 import 'package:web_project/pages/headBar.dart';
 import 'package:web_project/shared/app_colors.dart';
-
 
 class EmployeeSystem extends StatefulWidget {
   const EmployeeSystem({Key? key}) : super(key: key);
@@ -23,9 +26,9 @@ class _EmployeeSystemState extends State<EmployeeSystem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// side menu
-              const   Expanded(child: EmployeeSideBarMenu(),),
-
-
+              const Expanded(
+                child: EmployeeSideBarMenu(),
+              ),
 
               /// body
               Expanded(
@@ -43,16 +46,15 @@ class _EmployeeSystemState extends State<EmployeeSystem> {
                       ),
                       child: Column(
                         children: [
-                          const  HeadBar(),
-
+                          const HeadBar(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const    Text(
+                              const Text(
                                 "نظام قاعدة التنسيق",
                                 style: TextStyle(
                                   color: Color(0xff003c60),
-                                  fontSize:30,
+                                  fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -62,155 +64,148 @@ class _EmployeeSystemState extends State<EmployeeSystem> {
                             color: AppColors.mainColor,
                             thickness: 0.5,
                           ),
-                          SizedBox(height: 15,),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-
-                            child: DataTable(
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade100,
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(20),),
-                                dataRowColor: MaterialStateProperty.all(Colors.white),
-                                columns: const [
-                                  const    DataColumn(
-                                    label: Text(
-                                      '  ', // id
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xffac8600),
-                                      ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return OldStudentsFilter();
+                                  }));
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Color((0xffac8600))),
+                                  shape:
+                                      MaterialStateProperty.all<OutlinedBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          20.0), // Adjust the radius as needed
                                     ),
                                   ),
-                                  DataColumn(
-                                    label: Text(
-                                      'الاسم',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xffac8600),
-                                        fontSize: 23,
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'الرقم القومى',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xffac8600),
-                                        fontSize: 23,
-
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      ' ',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xffac8600),
-                                      ),
-                                    ),
-                                  ), // CRUD operations
-                                ], rows: [
-                              DataRow(cells: [
-                                DataCell(Text('1',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                  ),)),
-                                DataCell(Text('استاذ رمضان',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 20,
-                                  ),)),
-                                DataCell(Text('12345678901234',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 20,
-
-                                  ),
+                                  minimumSize: MaterialStateProperty.all<Size>(Size(
+                                      160,
+                                      50)), // Set fixed width and height for both buttons
                                 ),
+                                child: const Text(
+                                  'الطلاب القدامى',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22),
                                 ),
-                                DataCell(Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.edit,
-                                        color: Colors.green,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) {
+                                      return NewStudentsFilter();
+                                    }));
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Color((0xffac8600))),
+                                    shape: MaterialStateProperty.all<
+                                        OutlinedBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            20.0), // Adjust the radius as needed
                                       ),
                                     ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.delete, color: Colors.red),
-                                    ),
-                                  ],
-                                )),
-                              ]),
-                              DataRow(cells: [
-                                DataCell(Text('2')),
-                                DataCell(Text('استاذ رمضان',style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 20,
+                                    minimumSize:
+                                        MaterialStateProperty.all<Size>(Size(
+                                            160,
+                                            50)), // Set fixed width and height for both buttons
+                                  ),
+                                  child: const Text(
+                                    'الطلاب الجدد',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 22),
+                                  )),
+                            ],
+                          ),
+                          SizedBox(height: 25,),
+                          Divider(thickness: 1,
+                          color: Color(0xff003c60),),
+                          SizedBox(height: 25,),
 
-                                ),)),
-                                DataCell(Text('12345678901234',style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 20,
+                          ListTile(
+                            title: Text('طلبات الالتحاق المستلمة',
+                                style: TextStyle(
+                                color: Color(0xff003c60),
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                            ),
+                            leading:  Image.asset(
+                              'assets/images/requests.png',
+                              height: 35,
+                              color: Color(0xffac8600),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Card(
+                            color: Colors.grey.shade50,
+                            margin: EdgeInsets.all(8.0),
+                            child: ListTile(
+                              title: Text('طلبات الالتحاق المقبولة',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold)),
+                              leading:  Image.asset(
+                                'assets/images/acceptRequest.png',
+                                height: 35,
+                                color: Color(0xffac8600),
+                              ),
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return AcceptedRequests();
+                                    }));
 
-                                ),)),
-                                DataCell(Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.edit, color: Colors.green),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                              ]),
-                              DataRow(cells: [
-                                DataCell(Text('3')),
-                                DataCell(Text('استاذ رمضان',style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 20,
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Card(
+                            color: Colors.grey.shade50,
+                            margin: EdgeInsets.all(8.0),
+                            child: ListTile(
+                              title: Text('طلبات الالتحاق المرفوضة',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold)),
+                              leading:  Image.asset(
+                                'assets/images/rejectRequest.png',
+                                height: 35,
+                                color: Color(0xffac8600),
+                              ),
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return RejectedRequests();
+                                    }));
 
-                                ),),),
-                                DataCell(Text('12345678901234',style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 20,
-
-                                ),),),
-                                DataCell(Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.edit, color: Colors.green),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                              ]),
-
-                            ]),
+                              },
+                            ),
                           ),
                         ],
                       )),
                 ),
               ),
-
             ],
           ),
         ),

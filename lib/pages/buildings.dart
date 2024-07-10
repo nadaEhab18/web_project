@@ -74,78 +74,80 @@ class _BuildingsState extends State<Buildings> {
                         bottomRight: Radius.circular(30),
                       ),
                     ),
-                    child: Column(
-                      children: [
-                    const    HeadBar(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                          const  Text(
-                              "بيانات المبانى بالنظام",
-                              style: TextStyle(
-                                color: Color(0xff003c60),
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                      const    HeadBar(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                            const  Text(
+                                "بيانات المبانى بالنظام",
+                                style: TextStyle(
+                                  color: Color(0xff003c60),
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Divider(
-                          color: AppColors.mainColor,
-                          thickness: 0.5,
-                        ),
-                        SizedBox(height: 15,),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: DataTable(
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            dataRowColor: MaterialStateProperty.all(Colors.white),
-                            columns: const [
-                            const  DataColumn(
-                                label: Text(
-                                  'رقم المبنى', // id
+                            ],
+                          ),
+                          Divider(
+                            color: AppColors.mainColor,
+                            thickness: 0.5,
+                          ),
+                          SizedBox(height: 15,),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: DataTable(
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade100,
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              dataRowColor: MaterialStateProperty.all(Colors.white),
+                              columns: const [
+                              const  DataColumn(
+                                  label: Text(
+                                    'رقم المبنى', // id
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xffac8600),
+                                        fontSize: 23,
+                                      ),
+                                  ),
+                                ),
+                           const     DataColumn(
+                                  label: Text(
+                                    'نوع المبنى',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xffac8600),
                                       fontSize: 23,
                                     ),
-                                ),
-                              ),
-                         const     DataColumn(
-                                label: Text(
-                                  'نوع المبنى',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xffac8600),
-                                    fontSize: 23,
                                   ),
                                 ),
-                              ),
-                          const    DataColumn(
-                                label: Text(
-                                  'عدد الغرف',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xffac8600),
-                                    fontSize: 23,
+                            const    DataColumn(
+                                  label: Text(
+                                    'عدد الغرف',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xffac8600),
+                                      fontSize: 23,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                            rows: buildingsData.map((building) => DataRow(
-                              cells: [
-                                DataCell(Text('${building.number}',style: TextStyle(fontSize: 22),)),
-                                DataCell(Text('${buildingName(building.gender)}',style: TextStyle(fontSize: 22))),
-                                DataCell(Text('${building.numberOfRooms}',style: TextStyle(fontSize: 22))),
                               ],
-                            )).toList(),
+                              rows: buildingsData.map((building) => DataRow(
+                                cells: [
+                                  DataCell(Text('${building.number}',style: TextStyle(fontSize: 22),)),
+                                  DataCell(Text('${buildingName(building.gender)}',style: TextStyle(fontSize: 22))),
+                                  DataCell(Text('${building.numberOfRooms}',style: TextStyle(fontSize: 22))),
+                                ],
+                              )).toList(),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

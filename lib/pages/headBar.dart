@@ -14,6 +14,7 @@ class _HeadBarState extends State<HeadBar> {
   @override
   Widget build(BuildContext context) {
     return  Container(
+      margin:EdgeInsets.symmetric(vertical: 10) ,
       height: 40,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,

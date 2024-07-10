@@ -1,7 +1,7 @@
 class NewGirlsModel {
   final int id;
   final String name;
-  final String imageUrl;
+  final String? email;
   final int eygptian;
   final String nationalId;
   final String studentCode;
@@ -12,7 +12,7 @@ class NewGirlsModel {
   final String mobileNumber;
   final String fatherName;
   final String fatherNationalId;
-  final String fatherOccupation;
+  final String? fatherOccupation;
   final String fatherPhone;
   final String guardianName;
   final String guardianNationalId;
@@ -41,7 +41,7 @@ class NewGirlsModel {
   NewGirlsModel({
     required this.id,
     required this.name,
-    required this.imageUrl,
+    required this.email,
     required this.eygptian,
     required this.nationalId,
     required this.studentCode,
@@ -82,7 +82,7 @@ class NewGirlsModel {
   factory NewGirlsModel.fromJson(Map<String, dynamic> json) => NewGirlsModel(
     id: json["id"],
     name: json["name"],
-    imageUrl: json["image_url"],
+    email: json["email"],
     eygptian: json["Eygptian"],
     nationalId: json["nationalID"],
     studentCode: json["studentCode"],
@@ -123,7 +123,7 @@ class NewGirlsModel {
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
-    "image_url": imageUrl,
+    "email": email,
     "Eygptian": eygptian,
     "nationalID": nationalId,
     "studentCode": studentCode,

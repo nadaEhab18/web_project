@@ -6,6 +6,7 @@ import 'package:web_project/pages/collages.dart';
 import 'package:web_project/pages/employees.dart';
 import 'package:web_project/pages/girls.dart';
 import 'package:web_project/pages/home_page.dart';
+import 'package:web_project/pages/login_page.dart';
 import 'package:web_project/pages/system.dart';
 import 'package:web_project/shared/app_colors.dart';
 
@@ -114,20 +115,6 @@ class _SideBarMenuState extends State<SideBarMenu> {
               color: AppColors.secColor,
               thickness: 2,
             ),
-            // DrawerList(title: "النظام", icon: "assets/images/system.png", press: () {
-            //   Navigator.of(context).push(
-            //       MaterialPageRoute(
-            //           builder: (BuildContext context) {
-            //             return System();
-            //           }
-            //       )
-            //
-            //   );
-            // }),
-            // Divider(
-            //   color: AppColors.secColor,
-            //   thickness: 2,
-            // ),
             DrawerList(title: "الكليات", icon: "assets/images/city.png", press: () {
 
               Navigator.of(context).push(
@@ -139,6 +126,22 @@ class _SideBarMenuState extends State<SideBarMenu> {
 
               );
             }),
+            Divider(
+              color: AppColors.secColor,
+              thickness: 2,
+            ),
+            DrawerList(title: "الخروج", icon: "assets/images/llogout.png", press: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return LoginPage();
+                      }
+
+                  ),(route) => false);
+
+
+
+            }) ,
 
 
           ],
@@ -153,7 +156,7 @@ class DrawerList extends StatelessWidget {
 final String title , icon ;
 final VoidCallback press ;
 
-const DrawerList({Key? key, required this.title, required this.icon, required this.press}) : super(key: key);
+const DrawerList({Key? key, required this.title, required this.icon, required this.press, }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ListTile(

@@ -16,6 +16,8 @@ class EmployeeBuildings extends StatefulWidget {
 
 class _EmployeeBuildingsState extends State<EmployeeBuildings> {
   List<BuildingsModel> buildingsData = [];// List to store buildings data
+  String? dropValue;
+
 
   String buildingName(String name){
     if(name == 'Female') name = 'طالبات';
@@ -51,6 +53,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
     }
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -69,17 +74,18 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
               /// body
               Expanded(
                 flex: 4,
-                child: SingleChildScrollView(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height,
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(30),
-                        bottomRight: Radius.circular(30),
-                      ),
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
                     ),
+                  ),
+                  child:
+                  SingleChildScrollView(
                     child: Column(
                       children: [
                     const    HeadBar(),
@@ -103,238 +109,265 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
                         SizedBox(height: 15,),
                         Container(
                           width: MediaQuery.of(context).size.width,
-                          child: DataTable(
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            dataRowColor: MaterialStateProperty.all(Colors.white),
-                            columns: const [
-                            const  DataColumn(
-                                label: Text(
-                                  'رقم المبنى', // id
+                          child: SingleChildScrollView(
+                            child: DataTable(
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade100,
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              dataRowColor: MaterialStateProperty.all(Colors.white),
+                              columns: const [
+                              const  DataColumn(
+                                  label: Text(
+                                    'رقم المبنى', // id
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xffac8600),
+                                        fontSize: 23,
+                                      ),
+                                  ),
+                                ),
+                         const     DataColumn(
+                                  label: Text(
+                                    'نوع المبنى',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xffac8600),
                                       fontSize: 23,
                                     ),
-                                ),
-                              ),
-                         const     DataColumn(
-                                label: Text(
-                                  'نوع المبنى',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xffac8600),
-                                    fontSize: 23,
                                   ),
                                 ),
-                              ),
-                          const    DataColumn(
-                                label: Text(
-                                  'عدد الغرف',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xffac8600),
-                                    fontSize: 23,
+                            const    DataColumn(
+                                  label: Text(
+                                    'عدد الغرف',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xffac8600),
+                                      fontSize: 23,
+                                    ),
                                   ),
                                 ),
-                              ),
                         const      DataColumn(
-                                label: Text(
-                                  ' ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xffac8600),
+                                  label: Text(
+                                    ' ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xffac8600),
+                                    ),
                                   ),
-                                ),
-                              ), // CRUD operations
-                            ],
-                            rows: buildingsData.map((building) => DataRow(
-                              cells: [
-                                DataCell(Text('${building.number}',style: TextStyle(fontSize: 22),)),
-                                DataCell(Text('${buildingName(building.gender)}',style: TextStyle(fontSize: 22))),
-                                DataCell(Text('${building.numberOfRooms}',style: TextStyle(fontSize: 22))),
-                                DataCell(
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              String newNumber = building.number.toString();
-                                              String newGender = building.gender; // Initialize with current name or provide an input field for the user to enter a new name
-                                              String newRooms = building.numberOfRooms.toString();
-                                              String newFloors = building.numberOfFloors.toString(); // Initialize with current name or provide an input field for the user to enter a new name
-
-                                              return Directionality(
-                                                textDirection: TextDirection.rtl,
-                                                child: AlertDialog(
-                                                  backgroundColor: Colors.grey.shade50,
-                                                  title: Text("تأكيد التحديث",
-                                                    textDirection: TextDirection.rtl,
-                                                    style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
-                                                  ),
-                                                  content : Column(
-                                                    mainAxisSize: MainAxisSize.min,
-                                                    children: [
-                                                      TextFormField(
-                                                        decoration: InputDecoration(
-                                                          border: OutlineInputBorder(),
-                                                          prefixIcon: const Icon(
-                                                            Icons.add_business_rounded,
-                                                            color: Colors.black,
-                                                          ),
-                                                          enabledBorder: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(10),
-                                                            borderSide: BorderSide(
-                                                              color: Colors.grey[500]!,
-                                                            ),
-                                                          ),
-                                                          contentPadding: const EdgeInsets.all(16),
-                                                        ),
-
-                                                        initialValue: newNumber,
-                                                        onChanged: (value) {
-                                                          newNumber = value; // Update newName as the user types
-                                                        },
-
-                                                      ),
-                                                      TextFormField(
-                                                        decoration: InputDecoration(
-                                                          border: OutlineInputBorder(),
-                                                          prefixIcon: const Icon(
-                                                            Icons.add_business_rounded,
-                                                            color: Colors.black,
-                                                          ),
-                                                          enabledBorder: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(10),
-                                                            borderSide: BorderSide(
-                                                              color: Colors.grey[500]!,
-                                                            ),
-                                                          ),
-                                                          contentPadding: const EdgeInsets.all(16),
-                                                        ),
-
-                                                        initialValue: newGender,
-                                                        onChanged: (value) {
-                                                          newGender = value; // Update newName as the user types
-                                                        },
-
-                                                      ),
-                                                      TextFormField(
-                                                        decoration: InputDecoration(
-                                                          border: OutlineInputBorder(),
-                                                          prefixIcon: const Icon(
-                                                            Icons.add_business_rounded,
-                                                            color: Colors.black,
-                                                          ),
-                                                          enabledBorder: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(10),
-                                                            borderSide: BorderSide(
-                                                              color: Colors.grey[500]!,
-                                                            ),
-                                                          ),
-                                                          contentPadding: const EdgeInsets.all(16),
-                                                        ),
-
-                                                        initialValue: newRooms,
-                                                        onChanged: (value) {
-                                                          newRooms = value; // Update newName as the user types
-                                                        },
-
-                                                      ),
-                                                      TextFormField(
-                                                        decoration: InputDecoration(
-                                                          border: OutlineInputBorder(),
-                                                          prefixIcon: const Icon(
-                                                            Icons.add_business_rounded,
-                                                            color: Colors.black,
-                                                          ),
-                                                          enabledBorder: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(10),
-                                                            borderSide: BorderSide(
-                                                              color: Colors.grey[500]!,
-                                                            ),
-                                                          ),
-                                                          contentPadding: const EdgeInsets.all(16),
-                                                        ),
-
-                                                        initialValue: newFloors,
-                                                        onChanged: (value) {
-                                                          newFloors = value; // Update newName as the user types
-                                                        },
-
-                                                      ),
-
-
-
-
-                                                    ],
-                                                  )
-                                                  ,
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context).pop(); // Close the dialog
-                                                      },
-                                                      child: Text("إلغاء",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        updateBuilding(building.id, newNumber,newGender,newRooms,newFloors, context); // Call updateCollege function with the new name
-                                                        Navigator.of(context).pop(); // Close the dialog
-                                                      },
-                                                      child: Text("تحديث",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                        icon:const Icon(Icons.edit_note_rounded,color: Colors.green,size: 30,),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return Directionality(
-                                                textDirection: TextDirection.rtl,
-                                                child: AlertDialog(
-                                                  backgroundColor: Colors.grey.shade50,
-                                                  title: Text("تأكيد الحذف",textDirection: TextDirection.rtl,style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
-                                                  content: Text("هل أنت متأكد من رغبتك في حذف المبنى؟"),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context).pop(); // Close the dialog
-                                                      },
-                                                      child: Text("إلغاء",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        deleteBuilding(building.id, context); // Call deleteCollege function
-                                                        Navigator.of(context).pop(); // Close the dialog
-                                                      },
-                                                      child: Text("حذف",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                        icon: const Icon(Icons.delete_forever_rounded, color: Colors.red, size: 30),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                ), // CRUD operations
                               ],
-                            )).toList(),
+                              rows: buildingsData.map((building) => DataRow(
+                                cells: [
+                                  DataCell(Text('${building.number}',style: TextStyle(fontSize: 22),)),
+                                  DataCell(Text('${buildingName(building.gender)}',style: TextStyle(fontSize: 22))),
+                                  DataCell(Text('${building.numberOfRooms}',style: TextStyle(fontSize: 22))),
+                                  DataCell(
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                String newNumber = building.number.toString();
+                                                String newGender = building.gender;
+                                                                 //buildingName(building.gender); // Initialize with current name or provide an input field for the user to enter a new name
+                                                String newRooms = building.numberOfRooms.toString();
+                                                String newFloors = building.numberOfFloors.toString(); // Initialize with current name or provide an input field for the user to enter a new name
+
+                                                return Directionality(
+                                                  textDirection: TextDirection.rtl,
+                                                  child: AlertDialog(
+                                                    backgroundColor: Colors.grey.shade50,
+                                                    title: Text("تأكيد التحديث",
+                                                      textDirection: TextDirection.rtl,
+                                                      style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                                                    ),
+                                                    content : Column(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        TextFormField(
+                                                          decoration: InputDecoration(
+                                                            label:const Text('رقم المبنى :',style: TextStyle(color: Colors.grey),),
+                                                            border: OutlineInputBorder(),
+                                                            prefixIcon: const Icon(
+                                                              Icons.home_work_outlined,
+                                                              color: Colors.black,
+                                                            ),
+                                                            enabledBorder: OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(10),
+                                                              borderSide: BorderSide(
+                                                                color: Colors.grey[500]!,
+                                                              ),
+                                                            ),
+                                                            contentPadding: const EdgeInsets.all(16),
+                                                          ),
+
+                                                          initialValue: newNumber,
+                                                          onChanged: (value) {
+                                                            newNumber = value; // Update newName as the user types
+                                                          },
+
+                                                        ),
+                                                        SizedBox(height: 15,),
+
+                                                        Container(
+                                                          child: DropdownButtonFormField<String>(
+                                                            dropdownColor: Colors.white,
+                                                            decoration: InputDecoration(
+                                                              label:const Text('نوع المبنى :',style: TextStyle(color: Colors.grey),),
+                                                              prefixIcon:const Icon(Icons.how_to_reg,color: Colors.black,),
+                                                              border: InputBorder.none,
+                                                              enabledBorder: OutlineInputBorder(
+                                                               borderRadius: BorderRadius.circular(10),
+                                                                borderSide: BorderSide(
+                                                                  color: Colors.grey[500]!,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            value: newGender,
+                                                            items: <DropdownMenuItem<String>>[
+                                                              DropdownMenuItem<String>(
+                                                                child: Directionality(
+                                                                    textDirection: TextDirection.rtl,
+                                                                    child: Text('طلاب',style: TextStyle(color: Colors.black, ),)),
+                                                                value: 'Male', // Set value to 'Male'
+                                                              ),
+                                                              DropdownMenuItem<String>(
+                                                                child: Directionality(
+                                                                    textDirection: TextDirection.rtl,
+                                                                    child: Text('طالبات',style: TextStyle(color: Colors.black,),)),
+                                                                value: 'Female', // Set value to 'Female'
+                                                              ),
+                                                            ],
+                                                            onChanged: (String? newValue) {
+                                                              setState(() {
+                                                                newGender = newValue!;
+                                                              });
+                                                            },
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 15,),
+
+                                                        TextFormField(
+                                                          decoration: InputDecoration(
+                                                            label:const Text('عدد الغرف :',style: TextStyle(color: Colors.grey),),
+                                                            border: OutlineInputBorder(),
+                                                            prefixIcon: const Icon(
+                                                              Icons.calendar_view_month_rounded,
+                                                              color: Colors.black,
+                                                            ),
+                                                            enabledBorder: OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(10),
+                                                              borderSide: BorderSide(
+                                                                color: Colors.grey[500]!,
+                                                              ),
+                                                            ),
+                                                            contentPadding: const EdgeInsets.all(16),
+                                                          ),
+
+                                                          initialValue: newRooms,
+                                                          onChanged: (value) {
+                                                            newRooms = value; // Update newName as the user types
+                                                          },
+
+                                                        ),
+                                                        SizedBox(height: 15,),
+
+                                                        TextFormField(
+                                                          decoration: InputDecoration(
+                                                            label:const Text('عدد الطوابق :',style: TextStyle(color: Colors.grey),),
+                                                            border: OutlineInputBorder(),
+                                                            prefixIcon: const Icon(
+                                                              Icons.receipt_outlined,
+                                                              color: Colors.black,
+                                                            ),
+                                                            enabledBorder: OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(10),
+                                                              borderSide: BorderSide(
+                                                                color: Colors.grey[500]!,
+                                                              ),
+                                                            ),
+                                                            contentPadding: const EdgeInsets.all(16),
+                                                          ),
+
+                                                          initialValue: newFloors,
+                                                          onChanged: (value) {
+                                                            newFloors = value; // Update newName as the user types
+                                                          },
+
+                                                        ),
+
+
+
+
+
+                                                      ],
+                                                    )
+                                                    ,
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context).pop(); // Close the dialog
+                                                        },
+                                                        child: Text("إلغاء",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          updateBuilding(building.id, newNumber,newGender,newRooms,newFloors, context); // Call updateCollege function with the new name
+                                                          Navigator.of(context).pop(); // Close the dialog
+                                                        },
+                                                        child: Text("تحديث",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                          icon:const Icon(Icons.edit_note_rounded,color: Colors.green,size: 30,),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return Directionality(
+                                                  textDirection: TextDirection.rtl,
+                                                  child: AlertDialog(
+                                                    backgroundColor: Colors.grey.shade50,
+                                                    title: Text("تأكيد الحذف",textDirection: TextDirection.rtl,style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
+                                                    content: Text("هل أنت متأكد من رغبتك في حذف المبنى؟"),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context).pop(); // Close the dialog
+                                                        },
+                                                        child: Text("إلغاء",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          deleteBuilding(building.id, context); // Call deleteCollege function
+                                                          Navigator.of(context).pop(); // Close the dialog
+                                                        },
+                                                        child: Text("حذف",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                          icon: const Icon(Icons.delete_forever_rounded, color: Colors.red, size: 30),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )).toList(),
+                            ),
                           ),
                         ),
                       ],
@@ -352,11 +385,12 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
               barrierDismissible: false,
               context: context,
               builder: (context) {
-                return AlertDialog(
-                  backgroundColor: Colors.grey.shade50,
-                  content: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Column(
+                return Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: AlertDialog(
+                    backgroundColor: Colors.grey.shade50,
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         TextFormField(
                           controller: buildingNumberController,
@@ -376,8 +410,6 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
                             hintStyle: const TextStyle(
                               color: Colors.grey,
                             ),
-                            // labelText: "nationalID",
-                            //labelStyle: const TextStyle(color: Colors.grey),
                             contentPadding: const EdgeInsets.all(16),
                           ),
                           keyboardType: TextInputType.number,
@@ -389,41 +421,61 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
                           },
                         ),
                         SizedBox(height: 15,),
-                        TextFormField(
-                          controller: buildingGenderController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            prefixIcon: const Icon(
-                              Icons.question_mark,
-                              color: Colors.black,
+
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1.5,
+                              color: Colors.grey.shade400,
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                color: Colors.grey[500]!,
-                              ),
-                            ),
-                            hintText: "نوع المبنى",
-                            hintStyle: const TextStyle(
-                              color: Colors.grey,
-                            ),
-                            // labelText: "nationalID",
-                            //labelStyle: const TextStyle(color: Colors.grey),
-                            contentPadding: const EdgeInsets.all(16),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          keyboardType: TextInputType.text,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'الرجاء إدخال نوع المبنى';
-                            }
-                            return null;
-                          },
+                          child: DropdownButtonFormField(
+                            dropdownColor: Colors.white,
+                            decoration: InputDecoration(
+                              label:const Text('نوع المبنى :',style: TextStyle(color: Colors.grey),),
+                              prefixIcon:const Icon(Icons.how_to_reg,color: Colors.black,),
+                              border: InputBorder.none,
+                            ),
+                            onChanged: (val) {
+                              setState(() {
+                                dropValue = val as String;
+                                print('gender : $dropValue');
+                              });
+                            },
+                            validator: (value) {
+                              if (value == null || (value as String).isEmpty) {
+                                return 'الرجاء اختيار نوع المبنى';
+                              }
+                              return null;
+                            },
+                            value: dropValue,
+                            items: <DropdownMenuItem<String>>[
+                              DropdownMenuItem<String>(
+                                child: Text('طلاب',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                                value: 'Male',
+                              ),
+                              DropdownMenuItem<String>(
+                                child: Text('طالبات',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                                value: 'Female',
+                              ),
+                            ],
+                          ),
                         ),
+
+
                         SizedBox(height: 15,),
                         TextFormField(
                           controller: buildingRoomsController,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Colors.grey[500]!,
+                              ),
+
+                            ),
                             prefixIcon: const Icon(
                               Icons.calendar_view_month_rounded,
                               color: Colors.black,
@@ -438,8 +490,6 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
                             hintStyle: const TextStyle(
                               color: Colors.grey,
                             ),
-                            // labelText: "nationalID",
-                            //labelStyle: const TextStyle(color: Colors.grey),
                             contentPadding: const EdgeInsets.all(16),
                           ),
                           keyboardType: TextInputType.number,
@@ -450,9 +500,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 15,),
+                        SizedBox(height: 25,),
                         TextFormField(
-                          //controller: userNameController,
+                          controller: buildingFloorController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             prefixIcon: const Icon(
@@ -469,8 +519,6 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
                             hintStyle: const TextStyle(
                               color: Colors.grey,
                             ),
-                            // labelText: "nationalID",
-                            //labelStyle: const TextStyle(color: Colors.grey),
                             contentPadding: const EdgeInsets.all(16),
                           ),
                           keyboardType: TextInputType.number,
@@ -483,38 +531,39 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
                         ),
                       ],
                     ),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: ()  {
-                        String buildingNumber = buildingNumberController.text;
-                        String buildingGender = buildingGenderController.text; // Get college name from TextFormField
-                        String buildingRooms = buildingRoomsController.text;
-                        String buildingFloor = buildingFloorController.text; // Get college name from TextFormField
-                       // addBuilding(buildingNumber,buildingGender,buildingRooms,buildingFloor, context);
-                        Navigator.of(context).pop();                      },
-                      child: Text(
-                        'اضافة',
-                        style: TextStyle(
-                            color: AppColors.secColor,
-                            fontWeight: FontWeight.bold
+                    actions: [
+                      TextButton(
+                        onPressed: ()  {
+                          String buildingNumber = buildingNumberController.text;
+                          String buildingGender =  dropValue!;
+                                             //   buildingGenderController.text; // Get college name from TextFormField
+                          String buildingRooms = buildingRoomsController.text;
+                          String buildingFloor = buildingFloorController.text; // Get college name from TextFormField
+                          addBuilding(buildingNumber,buildingGender,buildingRooms,buildingFloor, context);
+                          Navigator.of(context).pop();                      },
+                        child: Text(
+                          'اضافة',
+                          style: TextStyle(
+                              color: AppColors.secColor,
+                              fontWeight: FontWeight.bold
 
+                          ),
                         ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        'الغاء',
-                        style: TextStyle(
-                            color:  AppColors.mainColor,
-                            fontWeight: FontWeight.bold
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          'الغاء',
+                          style: TextStyle(
+                              color:  AppColors.mainColor,
+                              fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               },
             );
@@ -527,37 +576,10 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
   }
 
 
-  // void deleteBuildingMethod(int idBuilding) async{
-  //   try {
-  //     final respone = await Dio().delete('http://localhost:4000/admin/deleteemployee/$idEmployee');
-  //
-  //
-  //     // Debugging: Print response data
-  //     print('Response: $respone');
-  //
-  //     // setState(() => isLoading = false);
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text('تم الحذف بنجاح'),
-  //         backgroundColor: isLoading == false ? Colors.green : Colors.red,
-  //       ),
-  //     );
-  //   } catch (e) {
-  //     // Error handling: Print and show error message
-  //     print('Error adding employee: $e');
-  //     setState(() => isLoading = false);
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text('حدث خطأ أثناء حذف الموظف'),
-  //         backgroundColor: Colors.red,
-  //       ),
-  //     );
-  //   }
-  // }
 
 
 
-  Future<void> addBuilding(String number,String gender,String number_of_rooms,int floors, BuildContext context) async {
+  Future<void> addBuilding(String number,String gender,String number_of_rooms,String floors, BuildContext context) async {
     try {
       Response response = await Dio().post(
         'http://localhost:4000/employee/addbuilding',
@@ -572,7 +594,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم إضافة المبنى بنجاح'),
+            content: Text('تم إضافة المبنى بنجاح',style: TextStyle(
+              color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22
+            ),),
             backgroundColor: Colors.green,
           ),
         );
@@ -582,7 +606,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
         // Show failure message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('فشل في إضافة المبنى'),
+            content: Text('فشل في إضافة المبنى',style: TextStyle(
+                color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22
+            ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -591,7 +617,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('حدث خطأ أثناء إضافة المبنى'),
+          content: Text('حدث خطأ أثناء إضافة المبنى',style: TextStyle(
+              color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22
+          ),),
           backgroundColor: Colors.red,
         ),
       );
@@ -613,7 +641,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم تحديث المبنى بنجاح'),
+            content: Text('تم تحديث المبنى بنجاح',style: TextStyle(
+                color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22
+            ),),
             backgroundColor: Colors.green,
           ),
         );
@@ -622,7 +652,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('فشل في تحديث المبنى'),
+            content: Text('فشل في تحديث المبنى',style: TextStyle(
+                color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22
+            ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -632,7 +664,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('حدث خطأ أثناء تحديث المبنى'),
+          content: Text('حدث خطأ أثناء تحديث المبنى',style: TextStyle(
+              color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22
+          ),),
           backgroundColor: Colors.red,
         ),
       );
@@ -648,7 +682,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تم حذف المبنى بنجاح'),
+            content: Text('تم حذف المبنى بنجاح',style: TextStyle(
+                color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22
+            ),),
             backgroundColor: Colors.green,
           ),
         );
@@ -656,7 +692,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('فشل في حذف المبنى'),
+            content: Text('فشل في حذف المبنى',style: TextStyle(
+                color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22
+            ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -666,7 +704,9 @@ class _EmployeeBuildingsState extends State<EmployeeBuildings> {
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('حدث خطأ أثناء حذف المبنى'),
+          content: Text('حدث خطأ أثناء حذف المبنى',style: TextStyle(
+              color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22
+          ),),
           backgroundColor: Colors.red,
         ),
       );

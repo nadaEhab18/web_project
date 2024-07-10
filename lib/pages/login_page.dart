@@ -191,9 +191,9 @@ class _LoginPageState extends State<LoginPage> {
                             if (value!.isEmpty) {
                               return 'الرجاء إدخال كلمة المرور';
                             }
-                            // if (value.length != 14) {
-                            //   return 'الرجاء إدخال الرقم القومي كامل';
-                            // }
+                             // if (value.length != 14) {
+                             //   return 'الرجاء إدخال الرقم القومي كامل';
+                             // }
                             return null;
                           },
                           onTap: () {},
@@ -249,8 +249,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),),
                       onPressed:_adminLoginMethod,
                       style: ElevatedButton.styleFrom(
-                        primary:passwordController.text.isEmpty
-                            ? Colors.grey: Color(0xffac8600),
+                        primary:Color(0xffac8600),
                         // shadowColor: Color(0xff40BFFF).withOpacity(0.24),
                       ),
                     ),
@@ -259,22 +258,31 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 10,),
 
                   /// Employee login
-    //               SizedBox(
-    //                 height: 50,
-    //                  width: 280,
-    //                 child:  ElevatedButton(
-    //                   child: Text('تسجيل الدخول الموظف',style: TextStyle(
-    //                     fontSize: 20,
-    //                     color: Colors.white,
-    //                   ),),
-    //                   onPressed: _employeeLoginMethod,
-    //                   style: ElevatedButton.styleFrom(
-    //                  primary: passwordController.text.isEmpty
-    //                                           ? Colors.grey: Color(0xffac8600),
-    // // shadowColor: Color(0xff40BFFF).withOpacity(0.24),
-    //                   ),
-    //                 ),
-    //               ),
+                  SizedBox(
+                    height: 50,
+                     width: 280,
+                    child:  ElevatedButton(
+                      child: Text('تسجيل الدخول الموظف',style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),),
+                      onPressed: _employeeLoginMethod,
+
+                      //(){
+                        // Navigator.of(context).push(
+                        //             MaterialPageRoute(
+                        //               builder: (BuildContext context) {
+                        //                 return EmployeeHomePage();
+                        //               },
+                        //             ),
+                        // );
+                     // },
+                      style: ElevatedButton.styleFrom(
+                     primary: Color(0xffac8600),
+    // shadowColor: Color(0xff40BFFF).withOpacity(0.24),
+                      ),
+                    ),
+                  ),
 
 
                 ],
@@ -343,7 +351,9 @@ class _LoginPageState extends State<LoginPage> {
         if (response.statusCode == 200) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('تم تسجيل الدخول بنجاح'),
+              content: Text('تم تسجيل الدخول بنجاح',style: TextStyle(
+                fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white
+              ),),
               backgroundColor: Colors.green,
             ),
           );
@@ -375,9 +385,10 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('حدث خطأ أثناء تسجيل الدخول', style: TextStyle(
+              content: Text('حدث خطأ أثناء تسجيل الدخول الرجاء التأكد من البيانات المدخلة', style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
+                color: Colors.white
               ),),
               backgroundColor: Colors.red,
             ),
@@ -387,7 +398,11 @@ class _LoginPageState extends State<LoginPage> {
         setState(() => isLoading = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('حدث خطأ أثناء تسجيل الدخول'),
+            content: Text('حدث خطأ أثناء تسجيل الدخول الرجاء التأكد من البيانات المدخلة',style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                color: Colors.white
+            ),),
             backgroundColor: Colors.red,
           ),
         );
@@ -418,7 +433,11 @@ class _LoginPageState extends State<LoginPage> {
       setState(() => isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('تم تسجيل الدخول بنجاح'),
+          content: Text('تم تسجيل الدخول بنجاح',style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
+              color: Colors.white
+          ),),
           backgroundColor: isLoading == false ? Colors.green : Colors.red,
         ),
       );

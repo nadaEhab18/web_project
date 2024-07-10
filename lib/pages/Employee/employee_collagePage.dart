@@ -54,7 +54,7 @@ class _EmployeeCollagesState extends State<EmployeeCollages> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const     Text(
+                              const Text(
                                 "الكليات",
                                 style: TextStyle(
                                   color: Color(0xff003c60),

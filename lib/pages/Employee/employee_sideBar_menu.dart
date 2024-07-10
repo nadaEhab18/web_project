@@ -5,6 +5,7 @@ import 'package:web_project/pages/Employee/employee_collagePage.dart';
 import 'package:web_project/pages/Employee/employee_girlsPage.dart';
 import 'package:web_project/pages/Employee/employee_homePage.dart';
 import 'package:web_project/pages/Employee/employee_systemPage.dart';
+import 'package:web_project/pages/login_page.dart';
 import 'package:web_project/shared/app_colors.dart';
 
 class EmployeeSideBarMenu extends StatefulWidget {
@@ -122,6 +123,22 @@ class _EmployeeSideBarMenuState extends State<EmployeeSideBarMenu> {
 
               );
             }),
+            Divider(
+              color: AppColors.secColor,
+              thickness: 2,
+            ),
+            DrawerList(title: "الخروج", icon: "assets/images/llogout.png", press: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return LoginPage();
+                      }
+
+                  ),(route) => false);
+
+
+
+            }) ,
 
 
           ],

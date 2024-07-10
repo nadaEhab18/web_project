@@ -1,9 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:web_project/models/newBoys_model.dart';
 import 'package:web_project/models/newGirls_model.dart';
 import 'package:web_project/pages/headBar.dart';
-import 'package:web_project/repository/newBoys_repository.dart';
 import 'package:web_project/repository/newGirls_repository.dart';
 import 'package:web_project/shared/app_colors.dart';
 import 'package:web_project/widgets/sideBar_menu.dart';
@@ -86,10 +84,7 @@ class _ShowNewGirlsState extends State<ShowNewGirls> {
                                   const  Text('الرجوع  ',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
                                  const   Icon(Icons.arrow_forward_rounded,color: Colors.white,),
                                   ],)),
-                              // TextButton(onPressed: (){
-                              //  NewBoysData();
-                              //
-                              // }, child: Text('الطلاب الجدد')),
+
 
                             ],
                           ),
@@ -122,31 +117,6 @@ class _ShowNewGirlsState extends State<ShowNewGirls> {
                                           color: Colors.grey.shade50,
                                           margin: EdgeInsets.all(8.0),
                                           child: ListTile(
-                                            //     leading:
-                                            //SizedBox(
-                                            //   width: 50,
-                                            //   height: 50,
-                                            //   child: ClipRRect(
-                                            //     borderRadius: BorderRadius.circular(15),
-                                            //     child: Image.network(
-                                            //       'http://localhost:52652/${oldMaleModel.imageUrl}',
-                                            //       fit: BoxFit.cover,
-                                            //     ),
-                                            //   ),
-                                            // ),
-                                            // Container(
-                                            //     height: 50,
-                                            //     width: 50,
-                                            //     decoration: BoxDecoration(
-                                            //         borderRadius: BorderRadius.circular(15),
-                                            //         image: DecorationImage(
-                                            //             fit: BoxFit.cover,
-                                            //             image: NetworkImage(
-                                            //                 oldMaleModel.imageUrl
-                                            //             )
-                                            //         )
-                                            //     ),
-                                            //     child: Image.network(oldMaleModel.imageUrl,height: 50,width: 50,)),
                                             title: Text(newFemaleModel.name,style:TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
                                             subtitle: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,

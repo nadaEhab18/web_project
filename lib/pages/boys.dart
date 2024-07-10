@@ -172,31 +172,6 @@ class OldBoyys extends StatelessWidget {
                   color: Colors.grey.shade50,
                   margin: EdgeInsets.all(8.0),
                   child: ListTile(
-                    //     leading:
-                    //SizedBox(
-                    //   width: 50,
-                    //   height: 50,
-                    //   child: ClipRRect(
-                    //     borderRadius: BorderRadius.circular(15),
-                    //     child: Image.network(
-                    //       'http://localhost:52652/${oldMaleModel.imageUrl}',
-                    //       fit: BoxFit.cover,
-                    //     ),
-                    //   ),
-                    // ),
-                    // Container(
-                    //     height: 50,
-                    //     width: 50,
-                    //     decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(15),
-                    //         image: DecorationImage(
-                    //             fit: BoxFit.cover,
-                    //             image: NetworkImage(
-                    //                 oldMaleModel.imageUrl
-                    //             )
-                    //         )
-                    //     ),
-                    //     child: Image.network(oldMaleModel.imageUrl,height: 50,width: 50,)),
                     title: Text(oldMaleModel.name,style:TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,31 +216,6 @@ Widget NewBoysData(){
                 color: Colors.grey.shade50,
                 margin: EdgeInsets.all(8.0),
                 child: ListTile(
-                  //     leading:
-                  //SizedBox(
-                  //   width: 50,
-                  //   height: 50,
-                  //   child: ClipRRect(
-                  //     borderRadius: BorderRadius.circular(15),
-                  //     child: Image.network(
-                  //       'http://localhost:52652/${oldMaleModel.imageUrl}',
-                  //       fit: BoxFit.cover,
-                  //     ),
-                  //   ),
-                  // ),
-                  // Container(
-                  //     height: 50,
-                  //     width: 50,
-                  //     decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(15),
-                  //         image: DecorationImage(
-                  //             fit: BoxFit.cover,
-                  //             image: NetworkImage(
-                  //                 oldMaleModel.imageUrl
-                  //             )
-                  //         )
-                  //     ),
-                  //     child: Image.network(oldMaleModel.imageUrl,height: 50,width: 50,)),
                   title: Text(newMaleModel.name,style:TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
